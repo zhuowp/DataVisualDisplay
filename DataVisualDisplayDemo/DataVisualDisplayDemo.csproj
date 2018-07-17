@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataVisualDisplay\DataVisualDisplay.csproj">
+      <Project>{bbfb52d4-e978-4de5-aaed-c8a0eb01e9e1}</Project>
+      <Name>DataVisualDisplay</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

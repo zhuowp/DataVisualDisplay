@@ -23,6 +23,21 @@ namespace DataVisualDisplayDemo
         public MainWindow()
         {
             InitializeComponent();
+
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+            timer.Elapsed += Timer_Elapsed;
+            timer.Start();
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Random r = new Random();
+                string value = r.Next(0, 9).ToString();
+                digital.Value = value;
+            });
         }
     }
 }
