@@ -17,7 +17,7 @@ namespace DataVisualDisplay.Helpers
         /// <param name="points"></param>
         /// <param name="clr"></param>
         /// <returns></returns>
-        public static Path DrawLine(List<Point> points, Color clr)
+        public static Path DrawLine(List<Point> points, Brush brush)
         {
             PathSegmentCollection segments = new PathSegmentCollection();
             for (int i = 1; i < points.Count; i++)
@@ -28,8 +28,8 @@ namespace DataVisualDisplay.Helpers
             Path segment = new Path()
             {
                 StrokeLineJoin = PenLineJoin.Round,
-                Stroke = new SolidColorBrush(clr),
-                Fill = new SolidColorBrush(clr),
+                Stroke = brush,
+                Fill = brush,
                 Opacity = 0.05,
                 StrokeThickness = 0.25,
                 Data = new PathGeometry()
@@ -50,24 +50,14 @@ namespace DataVisualDisplay.Helpers
         /// <param name="radius"></param>
         /// <param name="clr"></param>
         /// <returns></returns>
-        public static Path DrawEllipse(Point p, double radius, Color clr)
+        public static Path DrawEllipse(Point p, double radius, Brush brush)
         {
-            Color strokecolor;
-            if (clr == Colors.Transparent)
-            {
-                strokecolor = clr;
-            }
-            else
-            {
-                strokecolor = Colors.White;
-            }
-
             Path segment = new Path()
             {
                 StrokeLineJoin = PenLineJoin.Round,
-                Stroke = new SolidColorBrush(strokecolor),
+                Stroke = brush,
 
-                Fill = new SolidColorBrush(clr),
+                Fill = brush,
                 Opacity = 0.05,
                 StrokeThickness = 0.25,
                 Data = new EllipseGeometry(p, radius, radius)

@@ -19,6 +19,5 @@ namespace DataVisualDisplay.Models.LedDigital
         List<Point> GetUpColonSegment();
         List<Point> GetUpLeftSegment();
         List<Point> GetUpRightSegment();
-        Dictionary<string, List<Point>> GetAllSegments();
     }
 }

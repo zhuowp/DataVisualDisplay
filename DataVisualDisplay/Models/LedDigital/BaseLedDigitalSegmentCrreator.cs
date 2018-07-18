@@ -121,10 +121,5 @@ namespace DataVisualDisplay.Models.LedDigital
             points.Add(new Point(_parameter.DigitalWidth - _parameter.BevelWidth, _parameter.BevelWidth + _parameter.SegmentInterval));
             return points;
         }
-
-        public Dictionary<string, List<Point>> GetAllSegments()
-        {
-            return null;
-        }
     }
 }

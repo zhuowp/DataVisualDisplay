@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataVisualDisplayDemo"
-        xmlns:dvd="clr-namespace:DataVisualDisplay.Controls;assembly=DataVisualDisplay"
+        xmlns:view="clr-namespace:DataVisualDisplayDemo.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <dvd:LedDigital x:Name="digital" Value="5"/>
+        <TabControl>
+            <TabItem Header="LED Digital">
+                <view:LedDigitalView/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
