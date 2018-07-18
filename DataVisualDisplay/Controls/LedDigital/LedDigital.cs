@@ -80,7 +80,7 @@ namespace DataVisualDisplay.Controls
         /// 依赖属性-LED显示颜色
         /// </summary>
         public static readonly DependencyProperty DigitalBrushProperty =
-            DependencyProperty.Register("DigitalBrush", typeof(Brush), typeof(LedDigital), new PropertyMetadata(new SolidColorBrush(Colors.Red), new PropertyChangedCallback(DigitalBrushPropertyChange)));
+            DependencyProperty.Register("DigitalBrush", typeof(Brush), typeof(LedDigital), new PropertyMetadata(new SolidColorBrush(Colors.Red), new PropertyChangedCallback(OnDigitalBrushPropertyChanged)));
 
         /// <summary>
         /// LED高度
@@ -112,11 +112,17 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty BevelWidthProperty =
             DependencyProperty.Register("BevelWidth", typeof(double), typeof(LedDigital), new PropertyMetadata(2.0, new PropertyChangedCallback(OnSizePropertyChanged)));
 
+        /// <summary>
+        /// 数字片段非高亮状态下的透明度
+        /// </summary>
         public static readonly DependencyProperty DigitalDimOpacityProperty =
-            DependencyProperty.Register("DigitalDimOpacity", typeof(double), typeof(LedDigital), new PropertyMetadata(0.05));
+            DependencyProperty.Register("DigitalDimOpacity", typeof(double), typeof(LedDigital), new PropertyMetadata(0.05, OnDigitalBrushPropertyChanged));
 
+        /// <summary>
+        /// 数字片段非高亮状态下的颜色
+        /// </summary>
         public static readonly DependencyProperty DigitalDimBrushProperty =
-            DependencyProperty.Register("DigitalDimBrush", typeof(Brush), typeof(LedDigital), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+            DependencyProperty.Register("DigitalDimBrush", typeof(Brush), typeof(LedDigital), new PropertyMetadata(new SolidColorBrush(Colors.Red), OnDigitalBrushPropertyChanged));
 
         #endregion
 
@@ -289,7 +295,7 @@ namespace DataVisualDisplay.Controls
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void DigitalBrushPropertyChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnDigitalBrushPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             LedDigital led = d as LedDigital;
             if (led != null)

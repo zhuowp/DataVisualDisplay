@@ -9,6 +9,8 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel x:Name="PART_Root" Orientation="Horizontal"
+                                    Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

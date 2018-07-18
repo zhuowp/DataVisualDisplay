@@ -13,6 +13,7 @@ namespace DataVisualDisplayDemo.ViewModel
         #region Fields
 
         private string _singleDigitalValue = "";
+        private string _multiDigitalValue = "";
 
         #endregion
 
@@ -22,6 +23,19 @@ namespace DataVisualDisplayDemo.ViewModel
         {
             get { return _singleDigitalValue; }
             set { _singleDigitalValue = value; RaisePropertyChanged("SingleDigitalValue"); }
+        }
+
+        public string MultiDigitalValue
+        {
+            get
+            {
+                return _multiDigitalValue;
+            }
+
+            set
+            {
+                _multiDigitalValue = value; RaisePropertyChanged("MultiDigitalValue");
+            }
         }
 
         #endregion
@@ -46,6 +60,7 @@ namespace DataVisualDisplayDemo.ViewModel
             {
                 Random r = new Random();
                 SingleDigitalValue = r.Next(0, 9).ToString();
+                MultiDigitalValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             });
         }
 
