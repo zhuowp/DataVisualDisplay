@@ -1,10 +1,12 @@
-﻿using GalaSoft.MvvmLight;
+﻿using DataVisualDisplayDemo.Helper;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace DataVisualDisplayDemo.ViewModel
 {
@@ -14,6 +16,7 @@ namespace DataVisualDisplayDemo.ViewModel
 
         private string _singleDigitalValue = "";
         private string _multiDigitalValue = "";
+        private Brush _multiDigitalBrush = null;
 
         #endregion
 
@@ -35,6 +38,19 @@ namespace DataVisualDisplayDemo.ViewModel
             set
             {
                 _multiDigitalValue = value; RaisePropertyChanged("MultiDigitalValue");
+            }
+        }
+
+        public Brush MultiDigitalBrush
+        {
+            get
+            {
+                return _multiDigitalBrush;
+            }
+
+            set
+            {
+                _multiDigitalBrush = value; RaisePropertyChanged("MultiDigitalBrush");
             }
         }
 
@@ -61,6 +77,7 @@ namespace DataVisualDisplayDemo.ViewModel
                 Random r = new Random();
                 SingleDigitalValue = r.Next(0, 9).ToString();
                 MultiDigitalValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                MultiDigitalBrush = new SolidColorBrush(ColorHelper.GetRandomColor());
             });
         }
 

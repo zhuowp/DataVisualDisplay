@@ -28,10 +28,10 @@ namespace DataVisualDisplay.Helpers
             Path segment = new Path()
             {
                 StrokeLineJoin = PenLineJoin.Round,
-                Stroke = brush,
+                Stroke = new SolidColorBrush(Colors.Transparent),
                 Fill = brush,
                 Opacity = 0.05,
-                StrokeThickness = 0.25,
+                StrokeThickness = 0,
                 Data = new PathGeometry()
                 {
                     Figures = new PathFigureCollection()
