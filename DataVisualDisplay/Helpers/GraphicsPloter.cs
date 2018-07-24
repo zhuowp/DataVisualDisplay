@@ -28,9 +28,8 @@ namespace DataVisualDisplay.Helpers
             Path segment = new Path()
             {
                 StrokeLineJoin = PenLineJoin.Round,
-                Stroke = new SolidColorBrush(Colors.Transparent),
+                Stroke = brush,
                 Fill = brush,
-                Opacity = 0.05,
                 StrokeThickness = 0,
                 Data = new PathGeometry()
                 {
@@ -56,10 +55,9 @@ namespace DataVisualDisplay.Helpers
             {
                 StrokeLineJoin = PenLineJoin.Round,
                 Stroke = brush,
+                StrokeThickness = 0,
 
                 Fill = brush,
-                Opacity = 0.05,
-                StrokeThickness = 0.25,
                 Data = new EllipseGeometry(p, radius, radius)
             };
 

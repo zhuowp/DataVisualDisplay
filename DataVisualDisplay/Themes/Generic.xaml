@@ -5,6 +5,8 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/LedDigital.xaml"/>
-        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Gauge.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/CircularGauge.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Thermometer.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
 </ResourceDictionary>

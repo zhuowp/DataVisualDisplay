@@ -12,6 +12,10 @@
             <TabItem Header="LED Digital">
                 <view:LedDigitalView/>
             </TabItem>
+            
+            <TabItem Header="Circular Gauge">
+                <view:CircularGaugeView/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

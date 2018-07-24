@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="DataVisualDisplayDemo.View.CircularGaugeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DataVisualDisplayDemo.View"
+             xmlns:dvd="clr-namespace:DataVisualDisplay.Controls;assembly=DataVisualDisplay"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <dvd:CircularGauge x:Name="circularGauge" 
+                           OptimalRangeStartValue="0.3" OptimalRangeEndValue="0.7"
+                           Icon="..\Image\apple.png" IconHeight="30" IconWidth="30">
+            <dvd:CircularGauge.Pointers>
+                <dvd:GaugePointerCollection>
+                    <dvd:GaugePointer x:Name="pointer" IndicatedValue="{Binding CurrentValue}" EnableAnimateRotate="True" AnimatingSpeedFactor="5"/>
+                </dvd:GaugePointerCollection>
+            </dvd:CircularGauge.Pointers>
+        </dvd:CircularGauge>
+
+        <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1" 
+                           GaugeBackgroundColor="Blue" PointerCapRadius="25"
+                           MinValue="0" MaxValue="12" MajorDivisionsCount="12" MinorDivisionsCount="5" 
+                           ScaleStartAngle="-90" ScaleSweepAngle="360"
+                           OptimalRangeStartValue="0.0" OptimalRangeEndValue="0.0"
+                           Icon="..\Image\omega.png" IconHeight="20" IconWidth="20">
+            <dvd:CircularGauge.Pointers>
+                <dvd:GaugePointerCollection>
+                    <dvd:GaugePointer x:Name="pointerHour" IndicatedValue="{Binding Hour}" PointerLength="60" PointerThickness="20"
+                                      MaxValue="12" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
+                    <dvd:GaugePointer x:Name="pointerMinute" IndicatedValue="{Binding Minute}" PointerLength="75" PointerThickness="10"
+                                      MaxValue="60" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
+                    <dvd:GaugePointer x:Name="pointerSecond" IndicatedValue="{Binding Second}" PointerLength="90" PointerThickness="5"
+                                      MaxValue="60" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
+                </dvd:GaugePointerCollection>
+            </dvd:CircularGauge.Pointers>
+        </dvd:CircularGauge>
+    </Grid>
+</UserControl>

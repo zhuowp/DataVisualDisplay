@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace DataVisualDisplayDemo.ViewModel
@@ -17,6 +18,7 @@ namespace DataVisualDisplayDemo.ViewModel
         private string _singleDigitalValue = "";
         private string _multiDigitalValue = "";
         private Brush _multiDigitalBrush = null;
+        private Brush _multiDigitalBackgroundBrush = null;
 
         #endregion
 
@@ -54,6 +56,19 @@ namespace DataVisualDisplayDemo.ViewModel
             }
         }
 
+        public Brush MultiDigitalBackgroundBrush
+        {
+            get
+            {
+                return _multiDigitalBackgroundBrush;
+            }
+
+            set
+            {
+                _multiDigitalBackgroundBrush = value; RaisePropertyChanged("MultiDigitalBackgroundBrush");
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -78,6 +93,17 @@ namespace DataVisualDisplayDemo.ViewModel
                 SingleDigitalValue = r.Next(0, 9).ToString();
                 MultiDigitalValue = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 MultiDigitalBrush = new SolidColorBrush(ColorHelper.GetRandomColor());
+                MultiDigitalBackgroundBrush = new LinearGradientBrush(new GradientStopCollection()
+                {
+                    new GradientStop(){ Offset = 0, Color = Colors.White},
+                    new GradientStop(){ Offset = 0.5, Color = ColorHelper.GetRandomColor()},
+                    new GradientStop(){ Offset = 1, Color = Colors.White}
+                })
+                {
+                    StartPoint = new Point(0, 0),
+                    EndPoint = new Point(0, 1),
+                    Opacity = 0.3
+                };
             });
         }
 

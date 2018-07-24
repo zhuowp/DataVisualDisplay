@@ -13,8 +13,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <dvd:LedDigital x:Name="singleDigital" Value="{Binding SingleDigitalValue}" DigitalDimBrush="Blue" DigitalBrush="OrangeRed" Height="60" Width="30" HorizontalAlignment="Left"/>
-        <dvd:LedDigitalPanel x:Name="multiDigital" Grid.Row="1" DigitalCount ="19" Margin="20" Height="80" Width="720" 
-                             Value="{Binding MultiDigitalValue}" DigitalBrush="{Binding MultiDigitalBrush}"/>
+        <dvd:LedDigitalPanel x:Name="multiDigital" Grid.Row="1" DigitalCount ="19" Margin="20" Height="60" Width="600" HorizontalAlignment="Left"
+                             Value="{Binding MultiDigitalValue}" DigitalBrush="{Binding MultiDigitalBrush}" Background="{Binding MultiDigitalBackgroundBrush}"/>
 
     </Grid>
 </UserControl>

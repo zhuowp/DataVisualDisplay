@@ -47,7 +47,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Gauge.xaml">
+    <Page Include="Themes\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -56,6 +56,7 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Controls\Gauges\CircularGauge.cs" />
+    <Compile Include="Controls\Gauges\GaugePointer.cs" />
     <Compile Include="Controls\Gauges\Thermometer.cs" />
     <Compile Include="Controls\LedDigital\LedDigital.cs" />
     <Compile Include="Controls\LedDigital\LedDigitalPanel.cs" />
@@ -63,9 +64,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Thermometer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\Class1.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
+    <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
     <Compile Include="Models\LedDigital\BaseLedDigitalSegmentCrreator.cs" />
     <Compile Include="Models\LedDigital\DigitalParameter.cs" />
     <Compile Include="Models\LedDigital\ILedDigitalSegmentCreator.cs" />
@@ -94,7 +101,6 @@
   <ItemGroup>
     <Folder Include="Controls\Charts\" />
     <Folder Include="Controls\Maps\" />
-    <Folder Include="Converters\" />
     <Folder Include="Models\Charts\" />
     <Folder Include="Models\Gauges\" />
     <Folder Include="Models\Maps\" />
