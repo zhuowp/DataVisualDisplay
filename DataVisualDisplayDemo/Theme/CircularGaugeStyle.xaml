@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:DataVisualDisplay.Controls"
-                    xmlns:cvt="clr-namespace:DataVisualDisplay.Converters">
-
+                    xmlns:control="clr-namespace:DataVisualDisplay.Controls;assembly=DataVisualDisplay"
+                    xmlns:cvt="clr-namespace:DataVisualDisplay.Converters;assembly=DataVisualDisplay">
     <cvt:ImageOffsetConverter x:Key="imageOffsetConverter" />
     <cvt:RadiusToDiameterConverter x:Key="radiusToDiameterConverter"/>
     <cvt:PointerCenterConverter x:Key="pointerCenterConverter"/>
@@ -11,37 +10,24 @@
     <cvt:GlassEffectWidthConverter x:Key="glassEffectWidthConverter" />
     <cvt:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter" />
 
-    <Style TargetType="{x:Type local:GaugeScale}">
+    <Style x:Key="SecondPointerStyle" TargetType="{x:Type control:GaugePointer}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:GaugeScale}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <Style TargetType="{x:Type local:GaugePointer}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:GaugePointer}">
+                <ControlTemplate TargetType="{x:Type control:GaugePointer}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <Path x:Name="Pointer" Stroke="#FFE91C1C" StrokeThickness="2" 
+                            <Path x:Name="Pointer" Stroke="#FF1CE91C" StrokeThickness="2" 
                                   Width="{TemplateBinding PointerLength}" 
                                   Height="{TemplateBinding PointerThickness}" HorizontalAlignment="Center"
                                   Data="M1,1 L1,10 L156,6 z" Stretch="Fill"  RenderTransformOrigin="0,0.5" 
                                   RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerLength, Converter={StaticResource pointerCenterConverter}}">
                                 <Path.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF890A0A" Offset="0.197"/>
-                                        <GradientStop Color="#FFC40808" Offset="1"/>
-                                        <GradientStop Color="#FFE32323" Offset="0.61"/>
+                                        <GradientStop Color="#FF0A890A" Offset="0.197"/>
+                                        <GradientStop Color="#FF08C408" Offset="1"/>
+                                        <GradientStop Color="#FF23E323" Offset="0.61"/>
                                     </LinearGradientBrush>
                                 </Path.Fill>
                             </Path>
@@ -52,10 +38,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:CircularGauge">
+    <Style x:Key="CircularGaugeStyleForClock" TargetType="{x:Type control:CircularGauge}">
         <Setter Property="Template" >
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:CircularGauge}">
+                <ControlTemplate TargetType="{x:Type control:CircularGauge}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -72,16 +58,16 @@
                                      Fill="{TemplateBinding GaugeBackground}">
                                     <Ellipse.Stroke>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FF5F5C5C" Offset="0"/>
-                                            <GradientStop Color="#FFEEDEDE" Offset="0.35"/>
-                                            <GradientStop Color="#FFA09595" Offset="0.705"/>
-                                            <GradientStop Color="#FF636060" Offset="1"/>
+                                            <GradientStop Color="#FF5C5CFF" Offset="0"/>
+                                            <GradientStop Color="#FFEEDEFF" Offset="0.35"/>
+                                            <GradientStop Color="#FFA095FF" Offset="0.705"/>
+                                            <GradientStop Color="#FF6360FF" Offset="1"/>
                                         </LinearGradientBrush>
                                     </Ellipse.Stroke>
                                 </Ellipse>
                             </Grid>
 
-                            <!-- Icon -->
+                            <!-- 图标 -->
                             <Image Source="{TemplateBinding Icon}" 
                                    Width="{TemplateBinding IconWidth}" 
                                    Height="{TemplateBinding IconHeight}"
@@ -100,7 +86,7 @@
                             <!-- Pointer Panel -->
                             <Grid x:Name="PART_PointersPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="10000">
                             </Grid>
-                            
+
                             <!--Scales Panel-->
                             <Grid x:Name="PART_ScalesPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1000">
                             </Grid>

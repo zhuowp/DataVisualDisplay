@@ -14,31 +14,64 @@
         </Grid.ColumnDefinitions>
         
         <dvd:CircularGauge x:Name="circularGauge" 
-                           OptimalRangeStartValue="0.3" OptimalRangeEndValue="0.7"
-                           Icon="..\Image\apple.png" IconHeight="30" IconWidth="30">
+                           Icon="..\Image\apple.png" IconHeight="30" IconWidth="30" DialText="测试仪表" DialTextForeground="White" DialTextFontSize="14">
             <dvd:CircularGauge.Pointers>
                 <dvd:GaugePointerCollection>
                     <dvd:GaugePointer x:Name="pointer" IndicatedValue="{Binding CurrentValue}" EnableAnimateRotate="True" AnimatingSpeedFactor="5"/>
                 </dvd:GaugePointerCollection>
             </dvd:CircularGauge.Pointers>
+
+            <dvd:CircularGauge.Scales>
+                <dvd:GaugeScaleCollection>
+                    <dvd:GaugeScale ScaleStartAngle="-240" ScaleSweepAngle="100" MinValue="0" MaxValue="1" MajorDivisionsCount="5"
+                                    MajorTickForeground="Orange" MinorTickForeground="Orange" ScaleLabelForeground="Orange"/>
+                    <dvd:GaugeScale ScaleStartAngle="-140" ScaleSweepAngle="100" MinValue="1" MaxValue="2" MajorDivisionsCount="5" 
+                                    MajorTickForeground="Chartreuse" MinorTickForeground="Chartreuse" ScaleLabelForeground="Blue" IsDrawStartTick="False"/>
+                    <dvd:GaugeScale ScaleStartAngle="-40" ScaleSweepAngle="100" MinValue="2" MaxValue="3" MajorDivisionsCount="5" 
+                                    MajorTickForeground="Red" MinorTickForeground="Red" IsDrawStartTick="False" ScaleLabelForeground="Red"/>
+                </dvd:GaugeScaleCollection>
+            </dvd:CircularGauge.Scales>
         </dvd:CircularGauge>
 
-        <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1" 
-                           GaugeBackgroundColor="Blue" PointerCapRadius="25"
-                           MinValue="0" MaxValue="12" MajorDivisionsCount="12" MinorDivisionsCount="5" 
-                           ScaleStartAngle="-90" ScaleSweepAngle="360"
-                           OptimalRangeStartValue="0.0" OptimalRangeEndValue="0.0"
-                           Icon="..\Image\omega.png" IconHeight="20" IconWidth="20">
+        <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1" Style="{DynamicResource CircularGaugeStyleForClock}"
+                           PointerCapRadius="25"
+                           Icon="..\Image\omega.png" IconHeight="20" IconWidth="20"
+                           DialText="OMAGA" DialTextForeground="Black">
+            <dvd:CircularGauge.GaugeBackground>
+                <RadialGradientBrush GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                    <GradientStop Color="LightBlue" Offset="0.0"/>
+                    <GradientStop Color="Blue" Offset="0.8"/>
+                    <GradientStop Color="Chartreuse" Offset="1.0"/>
+                </RadialGradientBrush>
+            </dvd:CircularGauge.GaugeBackground>
             <dvd:CircularGauge.Pointers>
                 <dvd:GaugePointerCollection>
                     <dvd:GaugePointer x:Name="pointerHour" IndicatedValue="{Binding Hour}" PointerLength="60" PointerThickness="20"
                                       MaxValue="12" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
                     <dvd:GaugePointer x:Name="pointerMinute" IndicatedValue="{Binding Minute}" PointerLength="75" PointerThickness="10"
                                       MaxValue="60" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
-                    <dvd:GaugePointer x:Name="pointerSecond" IndicatedValue="{Binding Second}" PointerLength="90" PointerThickness="5"
+                    <dvd:GaugePointer x:Name="pointerSecond" Style="{DynamicResource SecondPointerStyle}" IndicatedValue="{Binding Second}" PointerLength="90" PointerThickness="5"
                                       MaxValue="60" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
                 </dvd:GaugePointerCollection>
             </dvd:CircularGauge.Pointers>
+            
+            <dvd:CircularGauge.Scales>
+                <dvd:GaugeScaleCollection>
+                    <dvd:GaugeScale MinValue="0" MaxValue="12" MajorDivisionsCount="12" MinorDivisionsCount="5" ScaleStartAngle="-90" ScaleSweepAngle="360"
+                                    MinorTickForeground="White" ScaleLabelForeground="Goldenrod" IsDrawStartTick="False" ScaleLabelRadius="110">
+                        <dvd:GaugeScale.MajorTickForeground>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="Yellow" Offset="0.0" />
+                                <GradientStop Color="Red" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </dvd:GaugeScale.MajorTickForeground>
+                    </dvd:GaugeScale>
+                    <dvd:GaugeScale MinValue="0" MaxValue="60" MajorDivisionsCount="12" MinorDivisionsCount="5" ScaleStartAngle="-90" ScaleSweepAngle="360"
+                                    MinorTickForeground="White" ScaleLabelForeground="Goldenrod" IsDrawStartTick="False" ScaleRadius="80" MajorTickForeground="White">
+                        
+                    </dvd:GaugeScale>
+                </dvd:GaugeScaleCollection>
+            </dvd:CircularGauge.Scales>
         </dvd:CircularGauge>
     </Grid>
 </UserControl>

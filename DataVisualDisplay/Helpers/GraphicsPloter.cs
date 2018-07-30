@@ -64,5 +64,14 @@ namespace DataVisualDisplay.Helpers
             return segment;
         }
 
+        public static Path DrawGeometry(string geometry)
+        {
+            Path path = new Path
+            {
+                Data = Geometry.Parse(geometry)
+            };
+
+            return path;
+        }
     }
 }

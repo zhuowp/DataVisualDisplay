@@ -57,6 +57,8 @@
     </Page>
     <Compile Include="Controls\Gauges\CircularGauge.cs" />
     <Compile Include="Controls\Gauges\GaugePointer.cs" />
+    <Compile Include="Controls\Gauges\GaugeScale.cs" />
+    <Compile Include="Controls\Gauges\GaugeScaleCollection.cs" />
     <Compile Include="Controls\Gauges\Thermometer.cs" />
     <Compile Include="Controls\LedDigital\LedDigital.cs" />
     <Compile Include="Controls\LedDigital\LedDigitalPanel.cs" />
