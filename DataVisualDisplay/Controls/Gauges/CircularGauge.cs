@@ -68,6 +68,12 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty GaugeBackgroundProperty
             = DependencyProperty.Register("GaugeBackground", typeof(Brush), typeof(CircularGauge), new PropertyMetadata(new SolidColorBrush(Colors.SteelBlue)));
 
+        public static readonly DependencyProperty GaugeEdgeThicknessProperty
+            = DependencyProperty.Register("GaugeEdgeThickness", typeof(double), typeof(CircularGauge), new PropertyMetadata(16.0));
+
+        public static readonly DependencyProperty GaugeEdgeBackgroundProperty
+            = DependencyProperty.Register("GaugeEdgeBackground", typeof(Brush), typeof(CircularGauge), new PropertyMetadata(new SolidColorBrush(Colors.Gray)));
+
         public static readonly DependencyProperty PointerCapRadiusProperty
             = DependencyProperty.Register("PointerCapRadius", typeof(double), typeof(CircularGauge), new PropertyMetadata(35.0));
 
@@ -127,6 +133,18 @@ namespace DataVisualDisplay.Controls
             {
                 SetValue(GaugeBackgroundProperty, value);
             }
+        }
+
+        public double GaugeEdgeThickness
+        {
+            get { return (double)GetValue(GaugeEdgeThicknessProperty); }
+            set { SetValue(GaugeEdgeThicknessProperty, value); }
+        }
+
+        public Brush GaugeEdgeBackground
+        {
+            get { return (Brush)GetValue(GaugeEdgeBackgroundProperty); }
+            set { SetValue(GaugeEdgeBackgroundProperty, value); }
         }
 
         public double PointerCapRadius

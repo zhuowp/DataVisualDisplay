@@ -61,18 +61,18 @@
                               Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" >
 
                             <Grid x:Name="PART_GaugePanel">
-                                <Ellipse x:Name="OuterFrame" StrokeThickness="16"
+                                <Ellipse x:Name="OuterFrame" StrokeThickness="{TemplateBinding GaugeEdgeThickness}" Stroke="{TemplateBinding GaugeEdgeBackground}"
                                      Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" 
                                      Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" 
                                      Fill="{TemplateBinding GaugeBackground}">
-                                    <Ellipse.Stroke>
+                                    <!--<Ellipse.Stroke>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                             <GradientStop Color="#FF5F5C5C" Offset="0"/>
                                             <GradientStop Color="#FFEEDEDE" Offset="0.35"/>
                                             <GradientStop Color="#FFA09595" Offset="0.705"/>
                                             <GradientStop Color="#FF636060" Offset="1"/>
                                         </LinearGradientBrush>
-                                    </Ellipse.Stroke>
+                                    </Ellipse.Stroke>-->
                                 </Ellipse>
                             </Grid>
 

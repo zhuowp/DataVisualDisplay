@@ -2,8 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:control="clr-namespace:DataVisualDisplay.Controls;assembly=DataVisualDisplay"
                     xmlns:cvt="clr-namespace:DataVisualDisplay.Converters;assembly=DataVisualDisplay">
-    <cvt:DoubleToVerticalTranslateTransformConverter x:Key="OffsetConverter" />
-    <cvt:DoubleValueConverter x:Key="radiusToDiameterConverter"/>
     <cvt:PointerCenterConverter x:Key="pointerCenterConverter"/>
 
     <Style x:Key="SecondPointerStyle" TargetType="{x:Type control:GaugePointer}">
@@ -34,80 +32,4 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CircularGaugeStyleForClock" TargetType="{x:Type control:CircularGauge}">
-        <Setter Property="Template" >
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type control:CircularGauge}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid x:Name="PART_Root"
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                              Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" 
-                              Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" >
-
-                            <Grid x:Name="PART_GaugePanel">
-                                <Ellipse x:Name="OuterFrame" StrokeThickness="16"
-                                     Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" 
-                                     Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=GaugeRadius, Converter={StaticResource radiusToDiameterConverter}}" 
-                                     Fill="{TemplateBinding GaugeBackground}">
-                                    <Ellipse.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FF5C5CFF" Offset="0"/>
-                                            <GradientStop Color="#FFEEDEFF" Offset="0.35"/>
-                                            <GradientStop Color="#FFA095FF" Offset="0.705"/>
-                                            <GradientStop Color="#FF6360FF" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Ellipse.Stroke>
-                                </Ellipse>
-                            </Grid>
-
-                            <!-- 图标 -->
-                            <Image Source="{TemplateBinding Icon}" 
-                                   Width="{TemplateBinding IconWidth}" 
-                                   Height="{TemplateBinding IconHeight}"
-                                   RenderOptions.BitmapScalingMode="HighQuality"
-                                   RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconOffset, Converter={StaticResource OffsetConverter}}"/>
-
-                            <!-- Dial Text -->
-                            <TextBlock Text="{TemplateBinding DialText}"  
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"  
-                                       Foreground="{TemplateBinding DialTextForeground}"
-                                       FontSize="{TemplateBinding DialTextFontSize}"                             
-                                       FontWeight="Bold"
-                                       RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DialTextOffset, Converter={StaticResource OffsetConverter}}">
-                            </TextBlock>
-
-                            <!-- Pointer Panel -->
-                            <Grid x:Name="PART_PointersPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="10000">
-                            </Grid>
-
-                            <!--Scales Panel-->
-                            <Grid x:Name="PART_ScalesPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="1000">
-                            </Grid>
-                            
-                            <!--Pointer Cap-->
-                            <Ellipse x:Name="PointerCap" 
-                                     Height="{TemplateBinding PointerCapRadius}" Panel.ZIndex="100001"
-                                     Width="{TemplateBinding PointerCapRadius}" StrokeThickness="4" Opacity="1" >
-                                <Ellipse.Stroke>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF000000" Offset="0.675"/>
-                                        <GradientStop Color="#FFC1B5B5" Offset="0.031"/>
-                                    </LinearGradientBrush>
-                                </Ellipse.Stroke>
-                                <Ellipse.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FF152029" Offset="0.846"/>
-                                        <GradientStop Color="#FF140204" Offset="0.342"/>
-                                    </LinearGradientBrush>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>

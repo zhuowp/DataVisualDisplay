@@ -33,7 +33,7 @@
             </dvd:CircularGauge.Scales>
         </dvd:CircularGauge>
 
-        <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1" Style="{DynamicResource CircularGaugeStyleForClock}"
+        <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1"
                            PointerCapRadius="25"
                            Icon="..\Image\omega.png" IconHeight="20" IconWidth="20"
                            DialText="OMAGA" DialTextForeground="Black">
@@ -44,6 +44,14 @@
                     <GradientStop Color="Chartreuse" Offset="1.0"/>
                 </RadialGradientBrush>
             </dvd:CircularGauge.GaugeBackground>
+            <dvd:CircularGauge.GaugeEdgeBackground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5C5CFF" Offset="0"/>
+                    <GradientStop Color="#FFEEDEFF" Offset="0.35"/>
+                    <GradientStop Color="#FFA095FF" Offset="0.705"/>
+                    <GradientStop Color="#FF6360FF" Offset="1"/>
+                </LinearGradientBrush>
+            </dvd:CircularGauge.GaugeEdgeBackground>
             <dvd:CircularGauge.Pointers>
                 <dvd:GaugePointerCollection>
                     <dvd:GaugePointer x:Name="pointerHour" IndicatedValue="{Binding Hour}" PointerLength="60" PointerThickness="20"
