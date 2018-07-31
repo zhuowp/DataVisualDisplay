@@ -4,9 +4,9 @@
     xmlns:local="clr-namespace:DataVisualDisplay.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/LedDigital.xaml"/>
-        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/CircularGauge.xaml"/>
-        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Thermometer.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/LedDigital/LedDigital.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Gauges/CircularGauge.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Gauges/Thermometer.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/PieChart.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
 </ResourceDictionary>

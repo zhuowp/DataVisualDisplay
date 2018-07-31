@@ -47,7 +47,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\CircularGauge.xaml">
+    <Page Include="Themes\Gauges\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Controls\Charts\PieChart.cs" />
     <Compile Include="Controls\Gauges\CircularGauge.cs" />
     <Compile Include="Controls\Gauges\GaugePointer.cs" />
     <Compile Include="Controls\Gauges\GaugeScale.cs" />
@@ -62,17 +63,23 @@
     <Compile Include="Controls\Gauges\Thermometer.cs" />
     <Compile Include="Controls\LedDigital\LedDigital.cs" />
     <Compile Include="Controls\LedDigital\LedDigitalPanel.cs" />
-    <Page Include="Themes\LedDigital.xaml">
+    <Page Include="Themes\LedDigital\LedDigital.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Thermometer.xaml">
+    <Page Include="Themes\Charts\PieChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Gauges\Thermometer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\Class1.cs" />
+    <Compile Include="Converters\DoubleToVerticalTranslateTransformConverter.cs" />
+    <Compile Include="Converters\DoubleValueConverter.cs" />
+    <Compile Include="Converters\PointerCenterConverter.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
     <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
     <Compile Include="Models\LedDigital\BaseLedDigitalSegmentCrreator.cs" />
@@ -101,11 +108,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\Charts\" />
     <Folder Include="Controls\Maps\" />
     <Folder Include="Models\Charts\" />
     <Folder Include="Models\Gauges\" />
     <Folder Include="Models\Maps\" />
+    <Folder Include="Themes\Maps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

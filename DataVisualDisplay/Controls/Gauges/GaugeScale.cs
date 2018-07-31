@@ -358,6 +358,30 @@ namespace DataVisualDisplay.Controls
             AddTick(minorTickPath, minorTickAngle);
         }
 
+        private void AddTick(Path path, double rotateAngle)
+        {
+            Point renderTransformPoint = new Point(0.5, 0.5);
+            path.RenderTransformOrigin = renderTransformPoint;
+            path.HorizontalAlignment = HorizontalAlignment.Center;
+            path.VerticalAlignment = VerticalAlignment.Center;
+
+            TransformGroup transformGroup = new TransformGroup();
+
+            RotateTransform rotateTransform = new RotateTransform();
+            rotateTransform.Angle = rotateAngle;
+            transformGroup.Children.Add(rotateTransform);
+
+            double majorTickRadian = rotateAngle * Math.PI / 180;
+            TranslateTransform translateTransform = new TranslateTransform();
+            translateTransform.X = ScaleRadius * Math.Cos(majorTickRadian);
+            translateTransform.Y = ScaleRadius * Math.Sin(majorTickRadian);
+            transformGroup.Children.Add(translateTransform);
+
+            path.RenderTransform = transformGroup;
+
+            _scaleContainer.Children.Add(path);
+        }
+
         private void AddScaleLable(double tickAngle, double tickValue)
         {
             double tickRadian = tickAngle * Math.PI / 180;
@@ -385,30 +409,6 @@ namespace DataVisualDisplay.Controls
             _scaleContainer.Children.Add(tb);
         }
 
-        private void AddTick(Path path, double rotateAngle)
-        {
-            Point renderTransformPoint = new Point(0.5, 0.5);
-            path.RenderTransformOrigin = renderTransformPoint;
-            path.HorizontalAlignment = HorizontalAlignment.Center;
-            path.VerticalAlignment = VerticalAlignment.Center;
-
-            TransformGroup transformGroup = new TransformGroup();
-
-            RotateTransform rotateTransform = new RotateTransform();
-            rotateTransform.Angle = rotateAngle;
-            transformGroup.Children.Add(rotateTransform);
-
-            double majorTickRadian = rotateAngle * Math.PI / 180;
-            TranslateTransform translateTransform = new TranslateTransform();
-            translateTransform.X = ScaleRadius * Math.Cos(majorTickRadian);
-            translateTransform.Y = ScaleRadius * Math.Sin(majorTickRadian);
-            transformGroup.Children.Add(translateTransform);
-
-            path.RenderTransform = transformGroup;
-
-            _scaleContainer.Children.Add(path);
-        }
-
         #endregion
 
         #region Public Methods
@@ -420,15 +420,13 @@ namespace DataVisualDisplay.Controls
                 return;
             }
 
-            //主刻度单元格角度
+            //主刻度单元角度
             double majorTickUnitAngle = ScaleSweepAngle / MajorDivisionsCount;
-            //主刻度单元格值
+            //主刻度单元值
             double majorTickUnitValue = Math.Round((MaxValue - MinValue) / MajorDivisionsCount, ScaleValuePrecision);
 
-            //副刻度单元格角度
+            //副刻度单元角度
             double minorTickUinitAngle = majorTickUnitAngle / MinorDivisionsCount;
-            //副刻度单元格值
-            double minorTickUnitValue = Math.Round((MaxValue - MinValue) / MajorDivisionsCount / MinorDivisionsCount, ScaleValuePrecision);
             
             if (IsDrawStartTick)
             {

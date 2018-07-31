@@ -2,15 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:DataVisualDisplay.Controls"
                     xmlns:cvt="clr-namespace:DataVisualDisplay.Converters">
-
-    <cvt:ImageOffsetConverter x:Key="imageOffsetConverter" />
-    <cvt:RadiusToDiameterConverter x:Key="radiusToDiameterConverter"/>
+    <cvt:DoubleToVerticalTranslateTransformConverter x:Key="OffsetConverter" />
+    <cvt:DoubleValueConverter x:Key="radiusToDiameterConverter"/>
     <cvt:PointerCenterConverter x:Key="pointerCenterConverter"/>
-    <cvt:RangeIndicatorLightPositionConverter x:Key="rangeIndicatorLightPositionConverter"/>
-    <cvt:BackgroundColorConverter x:Key="backgroundColorConverter" />
-    <cvt:GlassEffectWidthConverter x:Key="glassEffectWidthConverter" />
-    <cvt:ColorToSolidColorBrushConverter x:Key="colorToSolidColorBrushConverter" />
-
+    
     <Style TargetType="{x:Type local:GaugeScale}">
         <Setter Property="Template">
             <Setter.Value>
@@ -35,7 +30,7 @@
                             <Path x:Name="Pointer" Stroke="#FFE91C1C" StrokeThickness="2" 
                                   Width="{TemplateBinding PointerLength}" 
                                   Height="{TemplateBinding PointerThickness}" HorizontalAlignment="Center"
-                                  Data="M1,1 L1,10 L156,6 z" Stretch="Fill"  RenderTransformOrigin="0,0.5" 
+                                  Data="M1,1 L1,10 L156,6 z" Stretch="Fill" RenderTransformOrigin="0,0.5" 
                                   RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PointerLength, Converter={StaticResource pointerCenterConverter}}">
                                 <Path.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -86,7 +81,7 @@
                                    Width="{TemplateBinding IconWidth}" 
                                    Height="{TemplateBinding IconHeight}"
                                    RenderOptions.BitmapScalingMode="HighQuality"
-                                   RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconOffset, Converter={StaticResource imageOffsetConverter}}"/>
+                                   RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconOffset, Converter={StaticResource OffsetConverter}}"/>
 
                             <!-- Dial Text -->
                             <TextBlock Text="{TemplateBinding DialText}"  
@@ -94,7 +89,7 @@
                                        Foreground="{TemplateBinding DialTextForeground}"
                                        FontSize="{TemplateBinding DialTextFontSize}"                             
                                        FontWeight="Bold"
-                                       RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DialTextOffset, Converter={StaticResource rangeIndicatorLightPositionConverter}}">
+                                       RenderTransform="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DialTextOffset, Converter={StaticResource OffsetConverter}}">
                             </TextBlock>
 
                             <!-- Pointer Panel -->
