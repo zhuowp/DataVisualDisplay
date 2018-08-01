@@ -8,5 +8,45 @@
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Gauges/CircularGauge.xaml"/>
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Gauges/Thermometer.xaml"/>
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/PieChart.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/DoubleAxisChart.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type local:ChartFragment}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ChartFragment}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--<Style TargetType="{x:Type local:PiePiece}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PiePiece}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <Style TargetType="{x:Type local:Legend}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Legend}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

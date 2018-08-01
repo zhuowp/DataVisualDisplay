@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Media;
 
 namespace DataVisualDisplayDemo.ViewModel
 {
@@ -14,6 +15,7 @@ namespace DataVisualDisplayDemo.ViewModel
         #region Fields
 
         private double _currentValue = 0;
+        private Brush _digitalForeground = null;
         private double _hour = 0;
         private double _minute = 0;
         private double _second = 0;
@@ -33,6 +35,12 @@ namespace DataVisualDisplayDemo.ViewModel
             {
                 _currentValue = value; RaisePropertyChanged("CurrentValue");
             }
+        }
+
+        public Brush DigitalForeground
+        {
+            get { return _digitalForeground; }
+            set { _digitalForeground = value; RaisePropertyChanged("DigitalForeground"); }
         }
 
         public double Hour
@@ -95,7 +103,20 @@ namespace DataVisualDisplayDemo.ViewModel
             DispatcherHelper.UIDispatcher.Invoke(() =>
             {
                 Random r = new Random();
-                CurrentValue = r.NextDouble();
+                CurrentValue = Math.Round(r.NextDouble() * 3, 2);
+
+                if (CurrentValue <= 1)
+                {
+                    DigitalForeground = new SolidColorBrush(Colors.Orange);
+                }
+                else if (CurrentValue <= 2)
+                {
+                    DigitalForeground = new SolidColorBrush(Colors.Chartreuse);
+                }
+                else
+                {
+                    DigitalForeground = new SolidColorBrush(Colors.Red);
+                }
 
                 DateTime currentDateTime = DateTime.Now;
                 Second = currentDateTime.Second;

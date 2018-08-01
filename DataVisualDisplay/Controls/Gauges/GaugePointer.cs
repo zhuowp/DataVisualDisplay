@@ -65,10 +65,10 @@ namespace DataVisualDisplay.Controls
             = DependencyProperty.Register("PointerThickness", typeof(double), typeof(GaugePointer), new PropertyMetadata(16.0));
 
         public static readonly DependencyProperty RotateCenterXProperty
-            = DependencyProperty.Register("RotateCenterX", typeof(double), typeof(GaugePointer), new PropertyMetadata(40.0));
+            = DependencyProperty.Register("RotateCenterX", typeof(double), typeof(GaugePointer), new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty RotateCenterYProperty
-            = DependencyProperty.Register("RotateCenterY", typeof(double), typeof(GaugePointer), new PropertyMetadata(40.0));
+            = DependencyProperty.Register("RotateCenterY", typeof(double), typeof(GaugePointer), new PropertyMetadata(0.0));
 
         public static readonly DependencyProperty IndicatedValueProperty
             = DependencyProperty.Register("IndicatedValue", typeof(double), typeof(GaugePointer), new PropertyMetadata(0.0, OnIndicatedValueChanged));

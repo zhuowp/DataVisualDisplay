@@ -71,10 +71,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper\ColorHelper.cs" />
+    <Compile Include="ViewModel\PieChartViewModel.cs" />
     <Compile Include="ViewModel\CircularGaugeViewModel.cs" />
     <Compile Include="ViewModel\LedDigitalViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\PieChartView.xaml.cs">
+      <DependentUpon>PieChartView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CircularGaugeView.xaml.cs">
       <DependentUpon>CircularGaugeView.xaml</DependentUpon>
     </Compile>
@@ -94,6 +98,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Theme\CircularGaugeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PieChartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

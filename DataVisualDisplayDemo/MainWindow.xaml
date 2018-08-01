@@ -8,13 +8,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnSavePic" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Left" Content="Save" Click="btnSavePic_Click"/>
+        
+        <TabControl x:Name="tabContent" Grid.Row="1">
             <TabItem Header="LED Digital">
                 <view:LedDigitalView/>
             </TabItem>
             
             <TabItem Header="Circular Gauge">
                 <view:CircularGaugeView/>
+            </TabItem>
+
+            <TabItem Header="Pie Chart">
+                <view:PieChartView/>
             </TabItem>
         </TabControl>
     </Grid>

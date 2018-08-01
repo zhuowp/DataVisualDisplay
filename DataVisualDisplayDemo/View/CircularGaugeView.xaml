@@ -7,7 +7,7 @@
              xmlns:dvd="clr-namespace:DataVisualDisplay.Controls;assembly=DataVisualDisplay"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid x:Name="gridGaugeSample" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -17,7 +17,7 @@
                            Icon="..\Image\apple.png" IconHeight="30" IconWidth="30" DialText="测试仪表" DialTextForeground="White" DialTextFontSize="14">
             <dvd:CircularGauge.Pointers>
                 <dvd:GaugePointerCollection>
-                    <dvd:GaugePointer x:Name="pointer" IndicatedValue="{Binding CurrentValue}" EnableAnimateRotate="True" AnimatingSpeedFactor="5"/>
+                    <dvd:GaugePointer x:Name="pointer" MinValue="0" MaxValue="3" IndicatedValue="{Binding CurrentValue}" EnableAnimateRotate="True" AnimatingSpeedFactor="3"/>
                 </dvd:GaugePointerCollection>
             </dvd:CircularGauge.Pointers>
 
@@ -32,7 +32,10 @@
                 </dvd:GaugeScaleCollection>
             </dvd:CircularGauge.Scales>
         </dvd:CircularGauge>
-
+        
+        <dvd:LedDigitalPanel x:Name="multiDigital" Grid.Row="1" DigitalCount ="3" Margin="20" Height="48" Width="72" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                             Value="{Binding CurrentValue}" DigitalBrush="{Binding DigitalForeground}"/>
+        
         <dvd:CircularGauge x:Name="circularGaugeClock" Grid.Column="1"
                            PointerCapRadius="25"
                            Icon="..\Image\omega.png" IconHeight="20" IconWidth="20"
@@ -62,7 +65,7 @@
                                       MaxValue="60" MinValue="0" PointerStartAngle="-90" PointerSweepAngle="360"/>
                 </dvd:GaugePointerCollection>
             </dvd:CircularGauge.Pointers>
-            
+
             <dvd:CircularGauge.Scales>
                 <dvd:GaugeScaleCollection>
                     <dvd:GaugeScale MinValue="0" MaxValue="12" MajorDivisionsCount="12" MinorDivisionsCount="5" ScaleStartAngle="-90" ScaleSweepAngle="360"
@@ -76,7 +79,7 @@
                     </dvd:GaugeScale>
                     <dvd:GaugeScale MinValue="0" MaxValue="60" MajorDivisionsCount="12" MinorDivisionsCount="5" ScaleStartAngle="-90" ScaleSweepAngle="360"
                                     MinorTickForeground="White" ScaleLabelForeground="Goldenrod" IsDrawStartTick="False" ScaleRadius="80" MajorTickForeground="White">
-                        
+
                     </dvd:GaugeScale>
                 </dvd:GaugeScaleCollection>
             </dvd:CircularGauge.Scales>

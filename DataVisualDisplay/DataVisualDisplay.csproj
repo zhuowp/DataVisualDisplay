@@ -47,6 +47,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\Charts\DoubleAxisChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Gauges\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -55,7 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Controls\Charts\Chart.cs" />
+    <Compile Include="Controls\Charts\ChartFragment.cs" />
+    <Compile Include="Controls\Charts\DoubleAxisChart.cs" />
+    <Compile Include="Controls\Charts\Legend.cs" />
     <Compile Include="Controls\Charts\PieChart.cs" />
+    <Compile Include="Controls\Charts\PiePiece.cs" />
     <Compile Include="Controls\Gauges\CircularGauge.cs" />
     <Compile Include="Controls\Gauges\GaugePointer.cs" />
     <Compile Include="Controls\Gauges\GaugeScale.cs" />
@@ -82,6 +91,8 @@
     <Compile Include="Converters\PointerCenterConverter.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
     <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
+    <Compile Include="Models\Charts\DataPoint.cs" />
+    <Compile Include="Models\Charts\DoubleAxisChartTypeEnum.cs" />
     <Compile Include="Models\LedDigital\BaseLedDigitalSegmentCrreator.cs" />
     <Compile Include="Models\LedDigital\DigitalParameter.cs" />
     <Compile Include="Models\LedDigital\ILedDigitalSegmentCreator.cs" />
@@ -109,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\Maps\" />
-    <Folder Include="Models\Charts\" />
     <Folder Include="Models\Gauges\" />
     <Folder Include="Models\Maps\" />
     <Folder Include="Themes\Maps\" />

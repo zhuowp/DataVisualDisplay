@@ -1,12 +1,9 @@
 ﻿using DataVisualDisplayDemo.ViewModel;
-using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,23 +17,23 @@ using System.Windows.Shapes;
 namespace DataVisualDisplayDemo.View
 {
     /// <summary>
-    /// CircularGaugeView.xaml 的交互逻辑
+    /// ChartView.xaml 的交互逻辑
     /// </summary>
-    public partial class CircularGaugeView : UserControl
+    public partial class PieChartView : UserControl
     {
         #region Fields
 
-        private CircularGaugeViewModel _viewModel = null;
+        private PieChartViewModel _viewModel = null;
 
         #endregion
 
         #region Constructors
 
-        public CircularGaugeView()
+        public PieChartView()
         {
             InitializeComponent();
 
-            _viewModel = new CircularGaugeViewModel();
+            _viewModel = new PieChartViewModel();
             DataContext = _viewModel;
         }
 
