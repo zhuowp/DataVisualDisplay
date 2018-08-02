@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -59,6 +60,12 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty DataPointsProperty
             = DependencyProperty.Register("DataPoints", typeof(ObservableCollection<DataPoint>), typeof(PieChart), new PropertyMetadata(null, OnDataPointsPropertyChanged));
 
+        public static readonly DependencyProperty IsStepwisePiePieceProperty
+            = DependencyProperty.Register("IsStepwisePiePiece", typeof(bool), typeof(PieChart), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty BrushSetProperty
+            = DependencyProperty.Register("BrushSet", typeof(DataPointBrushs), typeof(PieChart), new PropertyMetadata(null, OnColorSetPropertyChanged));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -67,6 +74,18 @@ namespace DataVisualDisplay.Controls
         {
             get { return (ObservableCollection<DataPoint>)GetValue(DataPointsProperty); }
             set { SetValue(DataPointsProperty, value); }
+        }
+
+        public bool IsStepwisePiePiece
+        {
+            get { return (bool)GetValue(IsStepwisePiePieceProperty); }
+            set { SetValue(IsStepwisePiePieceProperty, value); }
+        }
+
+        public DataPointBrushs BrushSet
+        {
+            get { return (DataPointBrushs)GetValue(BrushSetProperty); }
+            set { SetValue(BrushSetProperty, value); }
         }
 
         #endregion
@@ -127,6 +146,10 @@ namespace DataVisualDisplay.Controls
             }
         }
 
+        private static void OnColorSetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
         #endregion
 
         #region Event Methods
@@ -147,8 +170,13 @@ namespace DataVisualDisplay.Controls
                 return;
             }
 
-            double halfWidth = Math.Min(_piePiecePanel.ActualHeight, _piePiecePanel.ActualWidth) / 2;
-            double innerRadius = halfWidth * 0.3;
+            double pieRadius = Math.Min(_piePiecePanel.ActualHeight, _piePiecePanel.ActualWidth) / 2 - 11;
+            if (pieRadius <= 0)
+            {
+                return;
+            }
+
+            double innerRadius = pieRadius * 0.3;
 
             double total = 0;
             foreach (DataPoint dataPoint in DataPoints)
@@ -157,38 +185,66 @@ namespace DataVisualDisplay.Controls
             }
 
             _piePiecePanel.Children.Clear();
-            //piePieces.Clear();
 
             double accumulativeAngle = 0;
-            foreach (DataPoint dataPoint in DataPoints)
+            for (int i = 0; i < DataPoints.Count; i++)
             {
-                double percentage = dataPoint.Value / total;
+                double percentage = DataPoints[i].Value / total;
                 double wedgeAngle = percentage * 360;
+
+                double radius = pieRadius;
+                if (IsStepwisePiePiece)
+                {
+                    radius = (pieRadius - innerRadius) / DataPoints.Count / 2 * (i + 1) + (innerRadius + pieRadius) / 2;
+                }
+
+                if (DataPoints[i].DataPointForeground == null && BrushSet != null && BrushSet.Count > 0)
+                {
+                    DataPoints[i].DataPointForeground = BrushSet[i % BrushSet.Count];
+                }
 
                 PiePiece piece = new PiePiece()
                 {
-                    Radius = halfWidth,
+                    Radius = radius,
                     Percentage = percentage,
                     InnerRadius = innerRadius,
-                    CenterX = halfWidth,
-                    CenterY = halfWidth,
+                    CenterX = pieRadius + 10,
+                    CenterY = pieRadius + 10,
                     ExtractLength = 0,
-                    Value = dataPoint.Value,
+                    Value = DataPoints[i].Value,
                     RotateAngle = accumulativeAngle,
-                    Fill = Brushes.Black,
+                    Fill = DataPoints[i].DataPointForeground,
+                    Tag = DataPoints[i],
 
-                    // record the index of the item which this pie slice represents
-                    //Tag = myCollectionView.IndexOf(item),
                     ToolTip = new ToolTip()
                 };
 
-                //piece.ToolTipOpening += new ToolTipEventHandler(PiePieceToolTipOpening);
-                //piece.MouseUp += new MouseButtonEventHandler(PiePieceMouseUp);
+                Binding binding = new Binding()
+                {
+                    Source = DataPoints[i],
+                    Path = new PropertyPath("IsSelected"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
 
-                //piePieces.Add(piece);
+                };
+                BindingOperations.SetBinding(piece, PiePiece.IsSelectedProperty, binding);
+
+                piece.ToolTipOpening += new ToolTipEventHandler(PiePieceToolTipOpening);
+                piece.MouseUp += new MouseButtonEventHandler(PiePieceMouseUp);
+
                 _piePiecePanel.Children.Insert(0, piece);
                 accumulativeAngle += wedgeAngle;
             }
+        }
+
+        private void PiePieceToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+        }
+
+        private void PiePieceMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            PiePiece piece = sender as PiePiece;
+            piece.IsSelected = true;
         }
 
         #endregion

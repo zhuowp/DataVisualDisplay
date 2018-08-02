@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace DataVisualDisplay.Models.Charts
 {
@@ -28,11 +29,13 @@ namespace DataVisualDisplay.Models.Charts
         private double _maxValue = 0;
         private double _value = 0;
         private object _label = null;
+        private Brush _dataPointForeground = null;
+        private bool _isSelected = false;
 
         #endregion
 
         #region Properties
-        
+
         public double BeginValue
         {
             get
@@ -108,6 +111,32 @@ namespace DataVisualDisplay.Models.Charts
             set
             {
                 _label = value; RaisePropertyChanged("Label");
+            }
+        }
+
+        public Brush DataPointForeground
+        {
+            get
+            {
+                return _dataPointForeground;
+            }
+
+            set
+            {
+                _dataPointForeground = value; RaisePropertyChanged("DataPointForeground");
+            }
+        }
+
+        public bool IsSelected
+        {
+            get
+            {
+                return _isSelected;
+            }
+
+            set
+            {
+                _isSelected = value; RaisePropertyChanged("IsSelected");
             }
         }
 

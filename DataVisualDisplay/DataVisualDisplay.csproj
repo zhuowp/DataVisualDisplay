@@ -51,6 +51,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Charts\Legend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Gauges\CircularGauge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -61,6 +65,7 @@
     </Page>
     <Compile Include="Controls\Charts\Chart.cs" />
     <Compile Include="Controls\Charts\ChartFragment.cs" />
+    <Compile Include="Controls\Charts\DataPointBrushs.cs" />
     <Compile Include="Controls\Charts\DoubleAxisChart.cs" />
     <Compile Include="Controls\Charts\Legend.cs" />
     <Compile Include="Controls\Charts\PieChart.cs" />

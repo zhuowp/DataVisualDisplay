@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -62,7 +63,7 @@ namespace DataVisualDisplay.Controls
 
         public static readonly DependencyProperty ExtractLengthProperty
             = DependencyProperty.Register("ExtractLength", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
-        
+
         public static readonly DependencyProperty RotateAngleProperty
             = DependencyProperty.Register("RotateAngle", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
@@ -71,6 +72,9 @@ namespace DataVisualDisplay.Controls
 
         public static readonly DependencyProperty ValueProperty
             = DependencyProperty.Register("Value", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0));
+
+        public static readonly DependencyProperty IsSelectedProperty
+            = DependencyProperty.Register("IsSelected", typeof(bool), typeof(PiePiece), new PropertyMetadata(false, OnIsSelectedPropertyChanged));
 
         #endregion
 
@@ -81,7 +85,7 @@ namespace DataVisualDisplay.Controls
             get { return (double)GetValue(CenterXProperty); }
             set { SetValue(CenterXProperty, value); }
         }
-        
+
         public double CenterY
         {
             get { return (double)GetValue(CenterYProperty); }
@@ -117,11 +121,17 @@ namespace DataVisualDisplay.Controls
             get { return (double)GetValue(PercentageProperty); }
             set { SetValue(PercentageProperty, value); }
         }
-        
+
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
+        }
+
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
         }
 
         #endregion
@@ -148,7 +158,7 @@ namespace DataVisualDisplay.Controls
                 {
                     DrawPiePiece(context);
                 }
-                
+
                 geometry.Freeze();
                 return geometry;
             }
@@ -156,8 +166,37 @@ namespace DataVisualDisplay.Controls
 
         #endregion
 
+        #region Dependency Property Changed
+
+        private static void OnIsSelectedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PiePiece piece = d as PiePiece;
+            if (piece == null)
+            {
+                return;
+            }
+
+            DoubleAnimation a = new DoubleAnimation();
+            a.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+
+            bool isSelected = (bool)e.NewValue;
+            if (isSelected)
+            {
+                a.To = 10;
+            }
+            else
+            {
+                a.To = 0;
+            }
+
+            piece.BeginAnimation(ExtractLengthProperty, a);
+        }
+
+
+        #endregion
+
         #region Private Methods
-        
+
         private void DrawPiePiece(StreamGeometryContext context)
         {
             double wedgeAngle = 360 * Percentage;

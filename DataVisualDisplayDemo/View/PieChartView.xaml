@@ -8,6 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <dvd:PieChart DataPoints="{Binding PieChartDataPoints}"/>
+        <dvd:PieChart DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="True">
+            <dvd:PieChart.BrushSet>
+                <dvd:DataPointBrushs>
+                    <SolidColorBrush Color="#9F15C3"/>
+                    <SolidColorBrush Color="#FF8E01"/>
+                    <SolidColorBrush Color="#339933"/>
+                    <SolidColorBrush Color="#00AAFF"/>
+                    <SolidColorBrush Color="#818183"/>
+                    <SolidColorBrush Color="#000033"/>
+                </dvd:DataPointBrushs>
+            </dvd:PieChart.BrushSet>
+        </dvd:PieChart>
     </Grid>
 </UserControl>

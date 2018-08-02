@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DataVisualDisplay.Models.Charts;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,9 +48,56 @@ namespace DataVisualDisplay.Controls
     /// </summary>
     public class Legend : Control
     {
+        #region Dependency Properties
+
+        public static readonly DependencyProperty LegendTitleProperty
+            = DependencyProperty.Register("LegendTitle", typeof(string), typeof(Legend), new PropertyMetadata(""));
+
+        public static readonly DependencyProperty DataPointsProperty
+            = DependencyProperty.Register("DataPoints", typeof(ObservableCollection<DataPoint>), typeof(Legend), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty BrushSetProperty
+            = DependencyProperty.Register("BrushSet", typeof(DataPointBrushs), typeof(Legend), new PropertyMetadata(null, OnColorSetPropertyChanged));
+
+        #endregion
+
+        #region Dependency Property Wrappers
+
+        public string LegendTitle
+        {
+            get { return (string)GetValue(LegendTitleProperty); }
+            set { SetValue(LegendTitleProperty, value); }
+        }
+
+        public ObservableCollection<DataPoint> DataPoints
+        {
+            get { return (ObservableCollection<DataPoint>)GetValue(DataPointsProperty); }
+            set { SetValue(DataPointsProperty, value); }
+        }
+
+        public DataPointBrushs BrushSet
+        {
+            get { return (DataPointBrushs)GetValue(BrushSetProperty); }
+            set { SetValue(BrushSetProperty, value); }
+        }
+
+        #endregion
+
+        #region Constructors
+
         static Legend()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Legend), new FrameworkPropertyMetadata(typeof(Legend)));
         }
+
+        #endregion
+
+        #region Dependency Property Changed Callbacks
+
+        private static void OnColorSetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        #endregion
     }
 }

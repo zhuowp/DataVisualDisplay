@@ -40,9 +40,12 @@ namespace DataVisualDisplayDemo.ViewModel
         {
             _pieChartDataPoints = new ObservableCollection<DataPoint>()
             {
-                new DataPoint() { Value = 1, Label = "Test Data 1" },
-                new DataPoint(){Value = 2, Label = "Test Data 2"},
-                new DataPoint(){Value=3, Label= "Test Data 3"}
+                new DataPoint() { Value = 5, Label = "Test Data 1" },
+                new DataPoint() { Value = 2, Label = "Test Data 2"},
+                new DataPoint() { Value=3, Label= "Test Data 3"},
+                new DataPoint() { Value=4, Label= "Test Data 4"},
+                new DataPoint() { Value=3, Label= "Test Data 5"},
+                new DataPoint() { Value=2, Label= "Test Data 6"},
             };
         }
 
