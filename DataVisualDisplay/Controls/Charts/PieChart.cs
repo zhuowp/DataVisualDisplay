@@ -70,6 +70,9 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty RadiusProperty
             = DependencyProperty.Register("Radius", typeof(double), typeof(PieChart), new PropertyMetadata(100.0, OnRadiusPropertyChanged));
 
+        public static readonly DependencyProperty InnerRadiusProperty
+            = DependencyProperty.Register("InnerRadius", typeof(double), typeof(PieChart), new PropertyMetadata(0.0, OnRadiusPropertyChanged));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -96,6 +99,12 @@ namespace DataVisualDisplay.Controls
         {
             get { return (double)GetValue(RadiusProperty); }
             set { SetValue(RadiusProperty, value); }
+        }
+
+        public double InnerRadius
+        {
+            get { return (double)GetValue(InnerRadiusProperty); }
+            set { SetValue(InnerRadiusProperty, value); }
         }
 
         #endregion
@@ -196,9 +205,7 @@ namespace DataVisualDisplay.Controls
             {
                 return;
             }
-
-            double innerRadius = pieRadius * 0.0;
-
+            
             double total = 0;
             foreach (DataPoint dataPoint in DataPoints)
             {
@@ -217,7 +224,7 @@ namespace DataVisualDisplay.Controls
                 double radius = pieRadius;
                 if (IsStepwisePiePiece)
                 {
-                    radius = (pieRadius - innerRadius) / DataPoints.Count / 2 * (i + 1) + (innerRadius + pieRadius) / 2;
+                    radius = (pieRadius - InnerRadius) / DataPoints.Count / 2 * (i + 1) + (InnerRadius + pieRadius) / 2;
                 }
 
                 if (DataPoints[i].DataPointForeground == null && BrushSet != null && BrushSet.Count > 0)
@@ -229,7 +236,7 @@ namespace DataVisualDisplay.Controls
                 {
                     Radius = radius,
                     Percentage = percentage,
-                    InnerRadius = innerRadius,
+                    InnerRadius = InnerRadius,
                     CenterX = pieRadius + 10,
                     CenterY = pieRadius + 10,
                     ExtractLength = 0,

@@ -47,7 +47,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Charts\DoubleAxisChart.xaml">
+    <Page Include="Themes\Charts\Chart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Charts\ChartFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -64,9 +68,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Controls\Charts\Chart.cs" />
-    <Compile Include="Controls\Charts\ChartFragment.cs" />
+    <Compile Include="Controls\Charts\ChartFrame.cs" />
     <Compile Include="Controls\Charts\DataPointBrushs.cs" />
-    <Compile Include="Controls\Charts\DoubleAxisChart.cs" />
     <Compile Include="Controls\Charts\Legend.cs" />
     <Compile Include="Controls\Charts\PieChart.cs" />
     <Compile Include="Controls\Charts\PiePiece.cs" />

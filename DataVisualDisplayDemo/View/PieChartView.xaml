@@ -16,7 +16,8 @@
         <Button x:Name="btnAnimation" Content="Animation" HorizontalAlignment="Center" Grid.Row="0"
                 Click="btnAnimation_Click"/>
         
-        <dvd:PieChart x:Name="pieChart" DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="False" Radius="150" Grid.Row="1">
+        <dvd:PieChart x:Name="pieChart" DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="True" Grid.Row="1"
+                      Radius="150" InnerRadius="50">
             <dvd:PieChart.BrushSet>
                 <dvd:DataPointBrushs>
                     <SolidColorBrush Color="#9F15C3"/>

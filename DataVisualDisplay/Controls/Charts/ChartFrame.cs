@@ -41,14 +41,14 @@ namespace DataVisualDisplay.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:ChartFragment/>
+    ///     <MyNamespace:ChartFrame/>
     ///
     /// </summary>
-    public class ChartFragment : Control
+    public class ChartFrame : Control
     {
-        static ChartFragment()
+        static ChartFrame()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ChartFragment), new FrameworkPropertyMetadata(typeof(ChartFragment)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ChartFrame), new FrameworkPropertyMetadata(typeof(ChartFrame)));
         }
     }
 }
