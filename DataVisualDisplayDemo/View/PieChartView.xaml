@@ -8,7 +8,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <dvd:PieChart DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnAnimation" Content="Animation" HorizontalAlignment="Center" Grid.Row="0"
+                Click="btnAnimation_Click"/>
+        
+        <dvd:PieChart x:Name="pieChart" DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="False" Radius="150" Grid.Row="1">
             <dvd:PieChart.BrushSet>
                 <dvd:DataPointBrushs>
                     <SolidColorBrush Color="#9F15C3"/>

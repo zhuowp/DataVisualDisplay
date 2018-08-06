@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         
         <dvd:CircularGauge x:Name="circularGauge" 
-                           Icon="..\Image\apple.png" IconHeight="30" IconWidth="30" DialText="测试仪表" DialTextForeground="White" DialTextFontSize="14">
+                           Icon="..\Image\apple.png" IconHeight="30" IconWidth="30" GaugeEdgeThickness="8" DialText="测试仪表" DialTextForeground="White" DialTextFontSize="14">
             <dvd:CircularGauge.Pointers>
                 <dvd:GaugePointerCollection>
                     <dvd:GaugePointer x:Name="pointer" MinValue="0" MaxValue="3" IndicatedValue="{Binding CurrentValue}" EnableAnimateRotate="True" AnimatingSpeedFactor="3"/>

@@ -52,6 +52,7 @@ namespace DataVisualDisplay.Controls
         #region Fields
 
         private Panel _piePiecePanel = null;
+        private List<PiePiece> _piePieceList = new List<PiePiece>();
 
         #endregion
 
@@ -65,6 +66,9 @@ namespace DataVisualDisplay.Controls
 
         public static readonly DependencyProperty BrushSetProperty
             = DependencyProperty.Register("BrushSet", typeof(DataPointBrushs), typeof(PieChart), new PropertyMetadata(null, OnColorSetPropertyChanged));
+
+        public static readonly DependencyProperty RadiusProperty
+            = DependencyProperty.Register("Radius", typeof(double), typeof(PieChart), new PropertyMetadata(100.0, OnRadiusPropertyChanged));
 
         #endregion
 
@@ -88,6 +92,12 @@ namespace DataVisualDisplay.Controls
             set { SetValue(BrushSetProperty, value); }
         }
 
+        public double Radius
+        {
+            get { return (double)GetValue(RadiusProperty); }
+            set { SetValue(RadiusProperty, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -108,16 +118,7 @@ namespace DataVisualDisplay.Controls
             _piePiecePanel = GetTemplateChild("PART_PiePiecePanel") as Panel;
 
             ConstructPiePieces();
-        }
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-
-            if (e.Property.Name == "ActualWidth" || e.Property.Name == "ActualHeight")
-            {
-                ConstructPiePieces();
-            }
+            AnimationDisplay();
         }
 
         #endregion
@@ -144,10 +145,30 @@ namespace DataVisualDisplay.Controls
             {
                 newDataPoints.CollectionChanged += pieChart.DataPoints_CollectionChanged;
             }
+
+            pieChart.ConstructPiePieces();
         }
 
         private static void OnColorSetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+            PieChart pieChart = d as PieChart;
+            if (pieChart == null)
+            {
+                return;
+            }
+
+            pieChart.ConstructPiePieces();
+        }
+
+        private static void OnRadiusPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PieChart pieChart = d as PieChart;
+            if (pieChart == null)
+            {
+                return;
+            }
+
+            pieChart.ConstructPiePieces();
         }
 
         #endregion
@@ -170,13 +191,13 @@ namespace DataVisualDisplay.Controls
                 return;
             }
 
-            double pieRadius = Math.Min(_piePiecePanel.ActualHeight, _piePiecePanel.ActualWidth) / 2 - 11;
+            double pieRadius = Radius;
             if (pieRadius <= 0)
             {
                 return;
             }
 
-            double innerRadius = pieRadius * 0.3;
+            double innerRadius = pieRadius * 0.0;
 
             double total = 0;
             foreach (DataPoint dataPoint in DataPoints)
@@ -185,6 +206,7 @@ namespace DataVisualDisplay.Controls
             }
 
             _piePiecePanel.Children.Clear();
+            _piePieceList.Clear();
 
             double accumulativeAngle = 0;
             for (int i = 0; i < DataPoints.Count; i++)
@@ -215,9 +237,16 @@ namespace DataVisualDisplay.Controls
                     RotateAngle = accumulativeAngle,
                     Fill = DataPoints[i].DataPointForeground,
                     Tag = DataPoints[i],
-
-                    ToolTip = new ToolTip()
                 };
+
+                Binding valueBinding = new Binding()
+                {
+                    Source = DataPoints[i],
+                    Path = new PropertyPath("Value"),
+                    Mode = BindingMode.TwoWay,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                };
+                BindingOperations.SetBinding(piece, PiePiece.ValueProperty, valueBinding);
 
                 Binding binding = new Binding()
                 {
@@ -229,9 +258,15 @@ namespace DataVisualDisplay.Controls
                 };
                 BindingOperations.SetBinding(piece, PiePiece.IsSelectedProperty, binding);
 
+                ToolTip toolTip = new ToolTip();
+                toolTip.Content = string.Format("{0} - {1} - {2}%", DataPoints[i].Label.ToString(), DataPoints[i].Value, Math.Round(percentage * 100, 2));
+                piece.ToolTip = toolTip;
+
+                piece.OnValueChangedAction = new Action(ConstructPiePieces);
                 piece.ToolTipOpening += new ToolTipEventHandler(PiePieceToolTipOpening);
                 piece.MouseUp += new MouseButtonEventHandler(PiePieceMouseUp);
 
+                _piePieceList.Add(piece);
                 _piePiecePanel.Children.Insert(0, piece);
                 accumulativeAngle += wedgeAngle;
             }
@@ -244,7 +279,43 @@ namespace DataVisualDisplay.Controls
         private void PiePieceMouseUp(object sender, MouseButtonEventArgs e)
         {
             PiePiece piece = sender as PiePiece;
-            piece.IsSelected = true;
+
+            bool newValue = !piece.IsSelected;
+
+            foreach (PiePiece piePiece in _piePieceList)
+            {
+                piePiece.IsSelected = false;
+            }
+
+            piece.IsSelected = newValue;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void AnimationDisplay()
+        {
+            if (_piePieceList == null)
+            {
+                return;
+            }
+
+            DoubleAnimation positionAnimation = new DoubleAnimation();
+            positionAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+            positionAnimation.From = 40;
+            positionAnimation.To = 0;
+
+            DoubleAnimation opacityAnimation = new DoubleAnimation();
+            opacityAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(500));
+            opacityAnimation.From = 0;
+            opacityAnimation.To = 1;
+
+            foreach (PiePiece piece in _piePieceList)
+            {
+                piece.BeginAnimation(PiePiece.ExtractLengthProperty, positionAnimation);
+                piece.BeginAnimation(OpacityProperty, opacityAnimation);
+            }
         }
 
         #endregion

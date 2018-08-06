@@ -71,7 +71,7 @@ namespace DataVisualDisplay.Controls
             = DependencyProperty.Register("Percentage", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0));
 
         public static readonly DependencyProperty ValueProperty
-            = DependencyProperty.Register("Value", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0));
+            = DependencyProperty.Register("Value", typeof(double), typeof(PiePiece), new FrameworkPropertyMetadata(0.0, OnValuePropertyChanged));
 
         public static readonly DependencyProperty IsSelectedProperty
             = DependencyProperty.Register("IsSelected", typeof(bool), typeof(PiePiece), new PropertyMetadata(false, OnIsSelectedPropertyChanged));
@@ -136,6 +136,12 @@ namespace DataVisualDisplay.Controls
 
         #endregion
 
+        #region Properties
+
+        public Action OnValueChangedAction { get; set; }
+
+        #endregion
+
         #region Constructors
 
         static PiePiece()
@@ -177,7 +183,7 @@ namespace DataVisualDisplay.Controls
             }
 
             DoubleAnimation a = new DoubleAnimation();
-            a.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+            a.Duration = new Duration(TimeSpan.FromMilliseconds(300));
 
             bool isSelected = (bool)e.NewValue;
             if (isSelected)
@@ -192,6 +198,16 @@ namespace DataVisualDisplay.Controls
             piece.BeginAnimation(ExtractLengthProperty, a);
         }
 
+        private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PiePiece piece = d as PiePiece;
+            if (piece == null)
+            {
+                return;
+            }
+
+            piece.OnValueChangedAction?.Invoke();
+        }
 
         #endregion
 

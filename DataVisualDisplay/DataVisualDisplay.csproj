@@ -91,11 +91,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\PiePieceToLegendConverter.cs" />
     <Compile Include="Converters\DoubleToVerticalTranslateTransformConverter.cs" />
     <Compile Include="Converters\DoubleValueConverter.cs" />
     <Compile Include="Converters\PointerCenterConverter.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
     <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
+    <Compile Include="Models\Charts\AnimationType.cs" />
     <Compile Include="Models\Charts\DataPoint.cs" />
     <Compile Include="Models\Charts\DoubleAxisChartTypeEnum.cs" />
     <Compile Include="Models\LedDigital\BaseLedDigitalSegmentCrreator.cs" />

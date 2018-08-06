@@ -56,9 +56,6 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty DataPointsProperty
             = DependencyProperty.Register("DataPoints", typeof(ObservableCollection<DataPoint>), typeof(Legend), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty BrushSetProperty
-            = DependencyProperty.Register("BrushSet", typeof(DataPointBrushs), typeof(Legend), new PropertyMetadata(null, OnColorSetPropertyChanged));
-
         #endregion
 
         #region Dependency Property Wrappers
@@ -75,12 +72,6 @@ namespace DataVisualDisplay.Controls
             set { SetValue(DataPointsProperty, value); }
         }
 
-        public DataPointBrushs BrushSet
-        {
-            get { return (DataPointBrushs)GetValue(BrushSetProperty); }
-            set { SetValue(BrushSetProperty, value); }
-        }
-
         #endregion
 
         #region Constructors
@@ -93,10 +84,6 @@ namespace DataVisualDisplay.Controls
         #endregion
 
         #region Dependency Property Changed Callbacks
-
-        private static void OnColorSetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-        }
 
         #endregion
     }

@@ -38,5 +38,10 @@ namespace DataVisualDisplayDemo.View
         }
 
         #endregion
+
+        private void btnAnimation_Click(object sender, RoutedEventArgs e)
+        {
+            pieChart.AnimationDisplay();
+        }
     }
 }

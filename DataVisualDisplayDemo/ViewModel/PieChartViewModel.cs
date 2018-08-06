@@ -14,6 +14,7 @@ namespace DataVisualDisplayDemo.ViewModel
         #region Fields
 
         private ObservableCollection<DataPoint> _pieChartDataPoints = null;
+        private System.Timers.Timer _timer = null;
 
         #endregion
 
@@ -47,6 +48,31 @@ namespace DataVisualDisplayDemo.ViewModel
                 new DataPoint() { Value=3, Label= "Test Data 5"},
                 new DataPoint() { Value=2, Label= "Test Data 6"},
             };
+
+            _timer = new System.Timers.Timer();
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Interval = 1000;
+            //_timer.Start();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Random random = new Random();
+            int randomIndex = random.Next(_pieChartDataPoints.Count);
+            int randomValue = random.Next(1, 10);
+
+            if (_pieChartDataPoints[randomIndex].Value == randomValue)
+            {
+                _pieChartDataPoints[randomIndex].Value++;
+            }
+            else
+            {
+                _pieChartDataPoints[randomIndex].Value = randomValue;
+            }
         }
 
         #endregion
