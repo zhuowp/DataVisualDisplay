@@ -1,4 +1,4 @@
-﻿using DataVisualDisplay.Models.Charts;
+﻿using DataVisualDisplay.Controls;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -52,7 +52,7 @@ namespace DataVisualDisplayDemo.ViewModel
             _timer = new System.Timers.Timer();
             _timer.Elapsed += _timer_Elapsed;
             _timer.Interval = 1000;
-            //_timer.Start();
+            _timer.Start();
         }
 
         #endregion

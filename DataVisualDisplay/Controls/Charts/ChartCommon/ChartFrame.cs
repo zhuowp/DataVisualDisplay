@@ -41,14 +41,35 @@ namespace DataVisualDisplay.Controls
     /// 步骤 2)
     /// 继续操作并在 XAML 文件中使用控件。
     ///
-    ///     <MyNamespace:Chart/>
+    ///     <MyNamespace:ChartFrame/>
     ///
     /// </summary>
-    public class Chart : Control
+    public class ChartFrame : Control
     {
-        static Chart()
+        #region Dependency Properties
+
+        public static readonly DependencyProperty ChartTypeProperty
+            = DependencyProperty.Register("ChartType", typeof(ChartTypeEnum), typeof(Chart), new PropertyMetadata(ChartTypeEnum.Unkonwn));
+
+        #endregion
+
+        #region Dependency Property Wrappers
+
+        public ChartTypeEnum ChartType
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Chart), new FrameworkPropertyMetadata(typeof(Chart)));
+            get { return (ChartTypeEnum)GetValue(ChartTypeProperty); }
+            set { SetValue(ChartTypeProperty, value); }
         }
+
+        #endregion
+
+        #region Constructors
+
+        static ChartFrame()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ChartFrame), new FrameworkPropertyMetadata(typeof(ChartFrame)));
+        }
+
+        #endregion
     }
 }

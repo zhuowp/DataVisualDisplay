@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DataVisualDisplay.Models.LedDigital
+namespace DataVisualDisplay.Controls
 {
     public interface ILedDigitalSegmentCreator
     {

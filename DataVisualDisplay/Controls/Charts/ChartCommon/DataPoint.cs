@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace DataVisualDisplay.Models.Charts
+namespace DataVisualDisplay.Controls
 {
     public class DataPoint : INotifyPropertyChanged
     {

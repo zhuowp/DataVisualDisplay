@@ -42,9 +42,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-
-                            <!--<Setter Property="Background" TargetName="Bd" Value="Blue"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="Red"/>-->
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
@@ -64,11 +61,17 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Grid>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock TextAlignment="Center" Grid.Column="1" FontSize="20" FontWeight="Bold" Text="{TemplateBinding LegendTitle}"/>
+                            <StackPanel Orientation="{TemplateBinding Orientation}">
+                                <TextBlock TextAlignment="Center" Grid.Column="1" FontSize="20" FontWeight="Bold" Text="{TemplateBinding LegendTitle}"
+                                           HorizontalAlignment="Left" Margin="10"/>
 
-                                <ListBox BorderThickness="0" ItemsSource="{TemplateBinding DataPoints}"
+                                <ListBox BorderThickness="0" ItemsSource="{TemplateBinding DataPoints}" HorizontalAlignment="Left"
                                          ItemContainerStyle="{StaticResource LegendItemContainerStyle}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel Orientation="{Binding Orientation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:Legend}}"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="3">

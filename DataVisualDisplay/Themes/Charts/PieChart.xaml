@@ -21,7 +21,8 @@
                             <Canvas x:Name="PART_PiePiecePanel"></Canvas>
                             
                             <!--Legend-->
-                            <local:Legend x:Name="PART_Legend" Grid.Column="1" DataPoints="{TemplateBinding DataPoints}"/>
+                            <local:Legend x:Name="PART_Legend" Grid.Column="1" DataPoints="{TemplateBinding DataPoints}" Orientation="Vertical"
+                                          LegendTitle="{TemplateBinding ChartTitle}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

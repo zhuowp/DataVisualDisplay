@@ -17,7 +17,7 @@
                 Click="btnAnimation_Click"/>
         
         <dvd:PieChart x:Name="pieChart" DataPoints="{Binding PieChartDataPoints}" IsStepwisePiePiece="True" Grid.Row="1"
-                      Radius="150" InnerRadius="50">
+                      Radius="150" InnerRadius="50" ChartTitle="Test Pie Chart">
             <dvd:PieChart.BrushSet>
                 <dvd:DataPointBrushs>
                     <SolidColorBrush Color="#9F15C3"/>

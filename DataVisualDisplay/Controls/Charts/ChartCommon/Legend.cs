@@ -1,5 +1,4 @@
-﻿using DataVisualDisplay.Models.Charts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -56,6 +55,9 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty DataPointsProperty
             = DependencyProperty.Register("DataPoints", typeof(ObservableCollection<DataPoint>), typeof(Legend), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty OrientationProperty
+            = DependencyProperty.Register("Orientation", typeof(Orientation), typeof(Legend), new PropertyMetadata(Orientation.Vertical));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -70,6 +72,12 @@ namespace DataVisualDisplay.Controls
         {
             get { return (ObservableCollection<DataPoint>)GetValue(DataPointsProperty); }
             set { SetValue(DataPointsProperty, value); }
+        }
+
+        public Orientation Orientation
+        {
+            get { return (Orientation)GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
         }
 
         #endregion

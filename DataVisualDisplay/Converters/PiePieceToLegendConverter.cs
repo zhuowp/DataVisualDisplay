@@ -1,5 +1,4 @@
 ﻿using DataVisualDisplay.Controls;
-using DataVisualDisplay.Models.Charts;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

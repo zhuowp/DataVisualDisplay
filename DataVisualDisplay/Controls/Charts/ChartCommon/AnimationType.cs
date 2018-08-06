@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataVisualDisplay.Models.Charts
+namespace DataVisualDisplay.Controls
 {
     public enum AnimationType : int
     {

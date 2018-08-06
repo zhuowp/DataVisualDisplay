@@ -67,12 +67,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Controls\Charts\Chart.cs" />
-    <Compile Include="Controls\Charts\ChartFrame.cs" />
-    <Compile Include="Controls\Charts\DataPointBrushs.cs" />
-    <Compile Include="Controls\Charts\Legend.cs" />
-    <Compile Include="Controls\Charts\PieChart.cs" />
-    <Compile Include="Controls\Charts\PiePiece.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\Chart.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\ChartFrame.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\ChartFrames.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\DataPointBrushs.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\Legend.cs" />
+    <Compile Include="Controls\Charts\PieChart\PieChart.cs" />
+    <Compile Include="Controls\Charts\PieChart\PiePiece.cs" />
     <Compile Include="Controls\Gauges\CircularGauge.cs" />
     <Compile Include="Controls\Gauges\GaugePointer.cs" />
     <Compile Include="Controls\Gauges\GaugeScale.cs" />
@@ -100,12 +101,12 @@
     <Compile Include="Converters\PointerCenterConverter.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
     <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
-    <Compile Include="Models\Charts\AnimationType.cs" />
-    <Compile Include="Models\Charts\DataPoint.cs" />
-    <Compile Include="Models\Charts\DoubleAxisChartTypeEnum.cs" />
-    <Compile Include="Models\LedDigital\BaseLedDigitalSegmentCrreator.cs" />
-    <Compile Include="Models\LedDigital\DigitalParameter.cs" />
-    <Compile Include="Models\LedDigital\ILedDigitalSegmentCreator.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\AnimationType.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\DataPoint.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\ChartTypeEnum.cs" />
+    <Compile Include="Controls\LedDigital\BaseLedDigitalSegmentCrreator.cs" />
+    <Compile Include="Controls\LedDigital\DigitalParameter.cs" />
+    <Compile Include="Controls\LedDigital\ILedDigitalSegmentCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -129,9 +130,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\Charts\DoubleAxisChart\" />
+    <Folder Include="Controls\Charts\LineChart\" />
     <Folder Include="Controls\Maps\" />
-    <Folder Include="Models\Gauges\" />
-    <Folder Include="Models\Maps\" />
+    <Folder Include="Models\" />
     <Folder Include="Themes\Maps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

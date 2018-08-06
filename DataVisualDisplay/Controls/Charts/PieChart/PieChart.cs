@@ -1,5 +1,4 @@
-﻿using DataVisualDisplay.Models.Charts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -73,6 +72,9 @@ namespace DataVisualDisplay.Controls
         public static readonly DependencyProperty InnerRadiusProperty
             = DependencyProperty.Register("InnerRadius", typeof(double), typeof(PieChart), new PropertyMetadata(0.0, OnRadiusPropertyChanged));
 
+        public static readonly DependencyProperty ChartTitleProperty
+            = DependencyProperty.Register("ChartTitle", typeof(string), typeof(PieChart), new PropertyMetadata(""));
+
         #endregion
 
         #region Dependency Property Wrappers
@@ -107,6 +109,11 @@ namespace DataVisualDisplay.Controls
             set { SetValue(InnerRadiusProperty, value); }
         }
 
+        public string ChartTitle
+        {
+            get { return (string)GetValue(ChartTitleProperty); }
+            set { SetValue(ChartTitleProperty, value); }
+        }
         #endregion
 
         #region Constructors

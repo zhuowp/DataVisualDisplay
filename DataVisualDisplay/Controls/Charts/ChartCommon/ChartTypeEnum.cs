@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataVisualDisplay.Models.Charts
+namespace DataVisualDisplay.Controls
 {
-    public enum DoubleAxisChartTypeEnum
+    public enum ChartTypeEnum
     {
+        Unkonwn = 0,
         ColumnChart = 1,
         LineChart = 2,
         StackedChart = 3,
