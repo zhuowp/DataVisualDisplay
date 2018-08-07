@@ -10,5 +10,6 @@
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/PieChart.xaml"/>
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/Legend.xaml"/>
         <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/Chart.xaml"/>
+        <ResourceDictionary Source="/DataVisualDisplay;component/Themes/Charts/ChartFrame.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

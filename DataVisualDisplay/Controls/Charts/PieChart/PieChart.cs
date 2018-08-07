@@ -46,7 +46,7 @@ namespace DataVisualDisplay.Controls
     ///     <MyNamespace:PieChart/>
     ///
     /// </summary>
-    public class PieChart : Control
+    public class PieChart : ChartBase
     {
         #region Fields
 
@@ -56,16 +56,10 @@ namespace DataVisualDisplay.Controls
         #endregion
 
         #region Dependency Properties
-
-        public static readonly DependencyProperty DataPointsProperty
-            = DependencyProperty.Register("DataPoints", typeof(ObservableCollection<DataPoint>), typeof(PieChart), new PropertyMetadata(null, OnDataPointsPropertyChanged));
-
+        
         public static readonly DependencyProperty IsStepwisePiePieceProperty
             = DependencyProperty.Register("IsStepwisePiePiece", typeof(bool), typeof(PieChart), new PropertyMetadata(false));
-
-        public static readonly DependencyProperty BrushSetProperty
-            = DependencyProperty.Register("BrushSet", typeof(DataPointBrushs), typeof(PieChart), new PropertyMetadata(null, OnColorSetPropertyChanged));
-
+        
         public static readonly DependencyProperty RadiusProperty
             = DependencyProperty.Register("Radius", typeof(double), typeof(PieChart), new PropertyMetadata(100.0, OnRadiusPropertyChanged));
 
@@ -79,22 +73,10 @@ namespace DataVisualDisplay.Controls
 
         #region Dependency Property Wrappers
 
-        public ObservableCollection<DataPoint> DataPoints
-        {
-            get { return (ObservableCollection<DataPoint>)GetValue(DataPointsProperty); }
-            set { SetValue(DataPointsProperty, value); }
-        }
-
         public bool IsStepwisePiePiece
         {
             get { return (bool)GetValue(IsStepwisePiePieceProperty); }
             set { SetValue(IsStepwisePiePieceProperty, value); }
-        }
-
-        public DataPointBrushs BrushSet
-        {
-            get { return (DataPointBrushs)GetValue(BrushSetProperty); }
-            set { SetValue(BrushSetProperty, value); }
         }
 
         public double Radius
@@ -114,6 +96,7 @@ namespace DataVisualDisplay.Controls
             get { return (string)GetValue(ChartTitleProperty); }
             set { SetValue(ChartTitleProperty, value); }
         }
+
         #endregion
 
         #region Constructors
@@ -137,44 +120,14 @@ namespace DataVisualDisplay.Controls
             AnimationDisplay();
         }
 
+        protected override void UpdateChartDisplay()
+        {
+            ConstructPiePieces();
+        }
+
         #endregion
 
         #region Dependency Property Changed Callback
-
-        private static void OnDataPointsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PieChart pieChart = d as PieChart;
-            if (pieChart == null)
-            {
-                return;
-            }
-
-            ObservableCollection<DataPoint> oldDataPoints = e.OldValue as ObservableCollection<DataPoint>;
-            ObservableCollection<DataPoint> newDataPoints = e.NewValue as ObservableCollection<DataPoint>;
-
-            if (oldDataPoints != null)
-            {
-                oldDataPoints.CollectionChanged -= pieChart.DataPoints_CollectionChanged;
-            }
-
-            if (newDataPoints != null)
-            {
-                newDataPoints.CollectionChanged += pieChart.DataPoints_CollectionChanged;
-            }
-
-            pieChart.ConstructPiePieces();
-        }
-
-        private static void OnColorSetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            PieChart pieChart = d as PieChart;
-            if (pieChart == null)
-            {
-                return;
-            }
-
-            pieChart.ConstructPiePieces();
-        }
 
         private static void OnRadiusPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

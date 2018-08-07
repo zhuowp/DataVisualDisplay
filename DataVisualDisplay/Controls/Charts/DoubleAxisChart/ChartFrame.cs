@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DataVisualDisplay.Helpers.Chart;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,12 +47,19 @@ namespace DataVisualDisplay.Controls
     ///     <MyNamespace:ChartFrame/>
     ///
     /// </summary>
-    public class ChartFrame : Control
+    public class ChartFrame : ChartBase
     {
+        #region Fields
+
+        private Panel _chartPanel = null;
+        private IChartHelper _chartHelper = null;
+
+        #endregion
+
         #region Dependency Properties
 
         public static readonly DependencyProperty ChartTypeProperty
-            = DependencyProperty.Register("ChartType", typeof(ChartTypeEnum), typeof(Chart), new PropertyMetadata(ChartTypeEnum.Unkonwn));
+            = DependencyProperty.Register("ChartType", typeof(ChartTypeEnum), typeof(ChartFrame), new PropertyMetadata(ChartTypeEnum.Unkonwn));
 
         #endregion
 
@@ -60,7 +70,7 @@ namespace DataVisualDisplay.Controls
             get { return (ChartTypeEnum)GetValue(ChartTypeProperty); }
             set { SetValue(ChartTypeProperty, value); }
         }
-
+        
         #endregion
 
         #region Constructors
@@ -68,6 +78,31 @@ namespace DataVisualDisplay.Controls
         static ChartFrame()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ChartFrame), new FrameworkPropertyMetadata(typeof(ChartFrame)));
+        }
+
+        #endregion
+
+        #region Override Methods
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (ChartType == ChartTypeEnum.LineChart)
+            {
+                _chartHelper = new LineChartHelper();
+            }
+
+            _chartPanel = GetTemplateChild("PART_Root") as Panel;
+
+            UpdateChartDisplay();
+        }
+
+        protected override void UpdateChartDisplay()
+        {
+            if(DataPoints != null)
+            {
+                Console.WriteLine(DataPoints.Last().Label + " --- " + DataPoints.Last().Value);
+            }
         }
 
         #endregion

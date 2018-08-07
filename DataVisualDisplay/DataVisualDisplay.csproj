@@ -67,8 +67,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Controls\Charts\ChartCommon\Axis.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\Axises.cs" />
     <Compile Include="Controls\Charts\ChartCommon\Chart.cs" />
-    <Compile Include="Controls\Charts\ChartCommon\ChartFrame.cs" />
+    <Compile Include="Controls\Charts\ChartCommon\ChartBase.cs" />
+    <Compile Include="Controls\Charts\DoubleAxisChart\ChartFrame.cs" />
     <Compile Include="Controls\Charts\ChartCommon\ChartFrames.cs" />
     <Compile Include="Controls\Charts\ChartCommon\DataPointBrushs.cs" />
     <Compile Include="Controls\Charts\ChartCommon\Legend.cs" />
@@ -99,6 +102,8 @@
     <Compile Include="Converters\DoubleToVerticalTranslateTransformConverter.cs" />
     <Compile Include="Converters\DoubleValueConverter.cs" />
     <Compile Include="Converters\PointerCenterConverter.cs" />
+    <Compile Include="Helpers\Chart\IChartHelper.cs" />
+    <Compile Include="Helpers\Chart\LineChartHelper.cs" />
     <Compile Include="Helpers\GraphicsPloter.cs" />
     <Compile Include="Controls\Gauges\GaugePointerCollection.cs" />
     <Compile Include="Controls\Charts\ChartCommon\AnimationType.cs" />
@@ -130,10 +135,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\Charts\DoubleAxisChart\" />
-    <Folder Include="Controls\Charts\LineChart\" />
     <Folder Include="Controls\Maps\" />
-    <Folder Include="Models\" />
     <Folder Include="Themes\Maps\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

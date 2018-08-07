@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,14 @@ namespace DataVisualDisplay.Controls
     /// </summary>
     public class Chart : Control
     {
+        #region Fields
+
+        private Panel _chartFramePanel = null;
+        private Panel _xAxisesPanel = null;
+        private Panel _yAxisesPanel = null;
+
+        #endregion
+
         #region Dependency Properties
 
         public static readonly DependencyProperty TitleProperty
@@ -62,6 +71,12 @@ namespace DataVisualDisplay.Controls
 
         public static readonly DependencyProperty ChartFramesProperty
             = DependencyProperty.Register("ChartFrames", typeof(ChartFrames), typeof(Chart), new PropertyMetadata(null, OnChartFramesPropertyChanged));
+
+        public static readonly DependencyProperty XAxisesProperty
+            = DependencyProperty.Register("XAxises", typeof(Axises), typeof(Chart), new PropertyMetadata(null, OnXAxisesPropertyChanged));
+
+        public static readonly DependencyProperty YAxisesProperty
+            = DependencyProperty.Register("YAxises", typeof(Axises), typeof(Chart), new PropertyMetadata(null, OnYAxisesPropertyChanged));
 
         #endregion
 
@@ -91,6 +106,24 @@ namespace DataVisualDisplay.Controls
             set { SetValue(TitleFontFamilyProperty, value); }
         }
 
+        public ChartFrames ChartFrames
+        {
+            get { return (ChartFrames)GetValue(ChartFramesProperty); }
+            set { SetValue(ChartFramesProperty, value); }
+        }
+
+        public Axises XAxises
+        {
+            get { return (Axises)GetValue(XAxisesProperty); }
+            set { SetValue(XAxisesProperty, value); }
+        }
+
+        public Axises YAxises
+        {
+            get { return (Axises)GetValue(YAxisesProperty); }
+            set { SetValue(YAxisesProperty, value); }
+        }
+
         #endregion
 
         #region Constructors
@@ -107,6 +140,14 @@ namespace DataVisualDisplay.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            _chartFramePanel = GetTemplateChild("PART_ChartFramesPanel") as Panel;
+            _xAxisesPanel = GetTemplateChild("PART_XAxisesPanel") as Panel;
+            _yAxisesPanel = GetTemplateChild("PART_YAxisesPanel") as Panel;
+
+            InitChartFrames();
+            InitXAxises();
+            InitYAxises();
         }
 
         #endregion
@@ -124,22 +165,67 @@ namespace DataVisualDisplay.Controls
             ChartFrames oldChartFrames = e.OldValue as ChartFrames;
             if (oldChartFrames != null)
             {
-                oldChartFrames.CollectionChanged -= ChartFrames_CollectionChanged;
+                oldChartFrames.CollectionChanged -= chart.ChartFrames_CollectionChanged;
             }
 
             ChartFrames newChartFrames = e.NewValue as ChartFrames;
             if (newChartFrames != null)
             {
-                newChartFrames.CollectionChanged += ChartFrames_CollectionChanged;
+                newChartFrames.CollectionChanged += chart.ChartFrames_CollectionChanged;
             }
+
+            chart.InitChartFrames();
+        }
+
+        private static void OnXAxisesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        private static void OnYAxisesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
         }
 
         #endregion
 
         #region Private Methods
 
-        private static void ChartFrames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void ChartFrames_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            InitChartFrames();
+        }
+
+        private void InitChartFrames()
+        {
+            InitCollectiveComponents(_chartFramePanel, ChartFrames);
+        }
+
+        private void InitXAxises()
+        {
+            InitCollectiveComponents(_xAxisesPanel, XAxises);
+        }
+
+        private void InitYAxises()
+        {
+            InitCollectiveComponents(_yAxisesPanel, YAxises);
+        }
+
+        private void InitCollectiveComponents<T>(Panel containerPanel, ObservableCollection<T> controls) where T : Control
+        {
+            if(containerPanel == null)
+            {
+                return;
+            }
+            containerPanel.Children.Clear();
+
+            if(controls == null)
+            {
+                return;
+            }
+
+            foreach(Control control in controls)
+            {
+                containerPanel.Children.Add(control);
+            }
         }
 
         #endregion

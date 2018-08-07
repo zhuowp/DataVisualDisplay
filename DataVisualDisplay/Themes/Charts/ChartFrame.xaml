@@ -8,6 +8,8 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="PART_Root">
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
